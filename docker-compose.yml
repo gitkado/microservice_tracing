@@ -1,9 +1,9 @@
 version: '3'
 services:
-  first:
-    build: .
+  first_python:
+    build: ./first_python
     volumes:
-      - .:/app
+      - ./first_python:/app
     ports:
       - 5000:5000
   jaeger:
