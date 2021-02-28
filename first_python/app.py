@@ -1,11 +1,12 @@
 import os
+
 from flask import Flask, jsonify
 from flask_opentracing import FlaskTracing
 from jaeger_client import Config
+import requests
 
 
 def init_tracer():
-    # TODO: this properties to yaml
     config = Config(
         config={
             'sampler': {
@@ -32,6 +33,21 @@ FlaskTracing(tracer=init_tracer(), trace_all_requests=True, app=app)
 def hello():
     return jsonify({
         "message": "Hello Flask World."
+    })
+
+
+@app.route("/request_github")
+def request_github():
+    github_uri = "https://github.com"
+
+    # TODO: span
+    app.logger.info("RequestStart: {0}".format(github_uri))
+    result = requests.get(github_uri)
+    app.logger.info("RequestFinish: {0}".format(github_uri))
+
+    return jsonify({
+        "message": "Request Github Success.",
+        "result": result.status_code
     })
 
 

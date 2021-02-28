@@ -11,15 +11,16 @@ $ docker-compose up
 $ docker-compose down
 # Request
 $ curl http://127.0.0.1:5000
+$ curl http://127.0.0.1:5000/request_github
 # JaegerWebGUI
 $ open -a "Google Chrome" http://localhost:16686
 ```
 
 ### TODO
 
-- Add the second of application container to docker-compose.yml
-- Add output log in app.py
 - Add span log in app.py
+- Logging format with trace ID
+- Add the second of application container to docker-compose.yml
 
 ### Reference
 
