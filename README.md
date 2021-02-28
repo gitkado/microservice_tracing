@@ -11,22 +11,19 @@ $ docker-compose up
 $ docker-compose down
 # Request
 $ curl http://127.0.0.1:5000
-```
-
-### Jaeger
-
-```shell
-$ docker run --rm -d --name jaeger \
-   -p 6831:6831/udp \
-   -p 16686:16686 \
-   jaegertracing/all-in-one:1.21
+# JaegerWebGUI
 $ open -a "Google Chrome" http://localhost:16686
 ```
 
-https://www.jaegertracing.io/docs/1.21/getting-started/
-
 ### TODO
 
-- Add the Jaeger container to docker-compose.yml
-- Use the Jaeger Client in the first of application
 - Add the second of application container to docker-compose.yml
+- Add output log in app.py
+- Add span log in app.py
+
+### Reference
+
+- [JaegerOfficial](https://www.jaegertracing.io/docs/1.21/getting-started/)
+- [Github: JaegerClientPython](https://github.com/jaegertracing/jaeger-client-python#getting-started)
+- [Github: FlaskOpentracing](https://github.com/opentracing-contrib/python-flask#usage)
+- [Tutorial: Tracing Python Flask requests with OpenTracing](https://scoutapm.com/blog/tutorial-tracing-python-flask-requests-with-opentracing)
