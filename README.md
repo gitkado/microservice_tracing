@@ -18,8 +18,8 @@ $ open -a "Google Chrome" http://localhost:16686
 
 ### TODO
 
-- Add span log in app.py
 - Logging format with trace ID
+- Add span log in app.py
 - Add the second of application container to docker-compose.yml
 
 ### Reference

@@ -33,21 +33,21 @@ def init_tracer():
 # TODO: 別モジュール化
 dictConfig({
     'version': 1,
-    'formatters': {'default': {
-        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
-    }},
+    'formatters': {
+        'default': {
+            'format': '%(asctime)s %(levelname)s %(module)s %(message)s',
+            'class': 'pythonjsonlogger.jsonlogger.JsonFormatter'
+        }},
     'handlers': {'wsgi': {
         'class': 'logging.StreamHandler',
         'stream': 'ext://flask.logging.wsgi_errors_stream',
         'formatter': 'default'
     }},
     'root': {
-        'level': 'INFO',
+        'level': os.getenv('LOG_LEVEL', logging.INFO),
         'handlers': ['wsgi']
     }
 })
-
-
 logging.getLogger('werkzeug').disabled = True
 app = Flask(__name__)
 FlaskTracing(tracer=init_tracer(), trace_all_requests=True, app=app)
@@ -56,13 +56,13 @@ FlaskTracing(tracer=init_tracer(), trace_all_requests=True, app=app)
 # TODO: 別モジュール化
 @app.before_request
 def before_request() -> NoReturn:
-    app.logger.info(f'START: {request.method} {request.url}')
+    app.logger.info(f'[START] {request.method} {request.url}')
 
 
 # TODO: 別モジュール化
 @app.after_request
 def after_request(response: flask.Response) -> flask.Response:
-    app.logger.info(f'END: {response.status_code}')
+    app.logger.info(f'[END] {response.status_code}')
     return response
 
 
@@ -78,9 +78,9 @@ def request_github() -> flask.Response:
     github_uri = "https://github.com"
 
     # TODO: span
-    app.logger.info("RequestStart: {0}".format(github_uri))
+    app.logger.info("[RequestStart] {0}".format(github_uri))
     result = requests.get(github_uri)
-    app.logger.info("RequestEnd: {0}".format(github_uri))
+    app.logger.info("[RequestEnd] {0}".format(github_uri))
 
     return jsonify({
         "message": "Request Github Success.",
