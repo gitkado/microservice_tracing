@@ -1,5 +1,6 @@
+ddtrace==0.47.0
 Flask==1.1.2
 Flask-Opentracing==1.1.0
 jaeger-client==4.4.0
-requests==2.25.1
 python-json-logger==2.0.1
+requests==2.25.1

@@ -34,8 +34,11 @@ def init_tracer():
 dictConfig({
     'version': 1,
     'formatters': {
+        # TODO: CustomFormatterを作成してjsonのキー名とかを変更する
         'default': {
-            'format': '%(asctime)s %(levelname)s %(module)s %(message)s',
+            'format': '%(asctime)s %(levelname)s %(module)s '
+                      '[dd.service=%(dd.service)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
+                      '[%(filename)s:%(lineno)d] %(message)s',
             'class': 'pythonjsonlogger.jsonlogger.JsonFormatter'
         }},
     'handlers': {'wsgi': {

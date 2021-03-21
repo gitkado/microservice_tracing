@@ -6,6 +6,10 @@ services:
       - ./first_python:/app
     ports:
       - 5000:5000
+    environment:
+      - DD_LOGS_INJECTION=true
+      - DD_SERVICE=first_python
+    command: ['ddtrace-run', 'python', 'app.py']
   jaeger:
     image: jaegertracing/all-in-one:1.21
     ports:

@@ -18,7 +18,7 @@ $ open -a "Google Chrome" http://localhost:16686
 
 ### TODO
 
-- Logging format with trace ID
+- Fix to Log format key name 
 - Add span log in app.py
 - Add the second of application container to docker-compose.yml
 
@@ -28,3 +28,4 @@ $ open -a "Google Chrome" http://localhost:16686
 - [Github: JaegerClientPython](https://github.com/jaegertracing/jaeger-client-python#getting-started)
 - [Github: FlaskOpentracing](https://github.com/opentracing-contrib/python-flask#usage)
 - [Tutorial: Tracing Python Flask requests with OpenTracing](https://scoutapm.com/blog/tutorial-tracing-python-flask-requests-with-opentracing)
+- [DatadogTracing](https://docs.datadoghq.com/ja/tracing/connect_logs_and_traces/python/)
