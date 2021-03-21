@@ -1,3 +1,4 @@
+import logging
 import os
 from typing import NoReturn
 
@@ -8,6 +9,7 @@ from jaeger_client import Config
 import requests
 
 
+# TODO: 別モジュール化
 def init_tracer():
     config = Config(
         config={
@@ -27,6 +29,7 @@ def init_tracer():
     return config.initialize_tracer()
 
 
+logging.getLogger('werkzeug').disabled = True
 app = Flask(__name__)
 FlaskTracing(tracer=init_tracer(), trace_all_requests=True, app=app)
 
