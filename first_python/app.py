@@ -1,5 +1,6 @@
 import logging
 import os
+from logging.config import dictConfig
 from typing import NoReturn
 
 import flask
@@ -27,6 +28,24 @@ def init_tracer():
         validate=True,
     )
     return config.initialize_tracer()
+
+
+# TODO: 別モジュール化
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
 
 
 logging.getLogger('werkzeug').disabled = True
